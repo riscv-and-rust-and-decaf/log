@@ -450,9 +450,9 @@ fn eq_ignore_ascii_case(a: &str, b: &str) -> bool {
     }
 
     if a.len() == b.len() {
-        a.bytes()
-            .zip(b.bytes())
-            .all(|(a, b)| to_ascii_uppercase(a) == to_ascii_uppercase(b))
+        let a = a.as_bytes();
+        let b = b.as_bytes();
+        (0..a.len()).all(|i| to_ascii_uppercase(a[i]) == to_ascii_uppercase(b[i]))
     } else {
         false
     }
